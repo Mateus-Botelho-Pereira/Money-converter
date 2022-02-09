@@ -1,87 +1,86 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
-    AppState,
     StyleSheet,
     View,
     TextInput,
     Alert
 } from 'react-native'
 
-class Home extends Component {
+export default Home = () => {
 
-    state = {
-        real: '',
-        dollar: '',
-        euro: ''
+    const [real, setReal] = useState('')
+    const [dollar, setDollar] = useState('')
+    const [euro, setEuro] = useState('')
+
+    useEffect(() => {
+        Alert.alert('Iniciou')
+    }, [])
+
+
+    functionReal = (text) => {
+        setReal(text)
+
+        if(text === ''){
+            clearAll()
+            return
+        } else {
+
+        }
     }
 
-    setReal = (text) => {
-        this.setState({ real: text }, () => {
-            if (this.state.real === ''){
-                this.clearAll()
-                return
-            } else {
-                
-            }
-        })
+    functionDollar = (text) => {
+        setDollar(text)
+
+        if(text === ''){
+            clearAll()
+            return
+        } else {
+            
+        }
     }
 
-    setDollar = (text) => {
-        this.setState({ dollar: text }, () => {
-            if (this.state.dollar === ''){
-                this.clearAll()
-                return
-            } else {
-                
-            }
-        })
-    }
+    functionEuro = (text) => {
+        setEuro(text)
 
-    setEuro = (text) => {
-        this.setState({ euro: text }, () => {
-            if (this.state.euro === ''){
-                this.clearAll()
-                return
-            } else {
-                
-            }
-        })       
+        if(text === ''){
+            clearAll()
+            return
+        } else {
+            
+        }
     }
 
     clearAll = () => {
-        this.setState({ real: '' })
-        this.setState({ dollar: '' })
-        this.setState({ euro: '' })
+        setReal('')
+        setDollar('')
+        setEuro('')
     }
 
-
-    render() {
-        return (
-            <View style={styles.container}>
-                <TextInput placeholder='Reais' 
-                    style={styles.input}
-                    keyboardType={'numeric'}
-                    placeholderTextColor={'white'}
-                    value={this.state.real.toString()}
-                    onChangeText={this.setReal} 
-                />
-                <TextInput placeholder='Dollars' 
-                    style={styles.input}
-                    keyboardType={'numeric'}
-                    placeholderTextColor={'white'}
-                    value={this.state.dollar.toString()}
-                    onChangeText={this.setDollar} 
-                />
-                <TextInput placeholder='Euros' 
-                    style={styles.input}
-                    keyboardType={'numeric'}
-                    placeholderTextColor={'white'}
-                    value={this.state.euro.toString()}
-                    onChangeText={this.setEuro} 
-                />
-            </View>
-        )
-    }
+    return (
+        <View style={styles.container}>
+            <TextInput placeholder='Reais' 
+                style={styles.input}
+                keyboardType={'numeric'}
+                placeholderTextColor={'white'}
+                value={real.toString()}
+                onChangeText={functionReal} 
+            />
+            <TextInput placeholder='Dollars' 
+                style={styles.input}
+                keyboardType={'numeric'}
+                placeholderTextColor={'white'}
+                value={dollar.toString()}
+                onChangeText={functionDollar} 
+            />
+            <TextInput placeholder='Euros' 
+                style={styles.input}
+                keyboardType={'numeric'}
+                placeholderTextColor={'white'}
+                value={euro.toString()}
+                onChangeText={functionEuro} 
+            />
+        </View>
+    )
 }
 
 const styles = StyleSheet.create({
@@ -107,7 +106,5 @@ const styles = StyleSheet.create({
     buttonText: {
         fontSize: 20,
         color: '#FFF'
-    },
+    }
 })
-
-export default Home
