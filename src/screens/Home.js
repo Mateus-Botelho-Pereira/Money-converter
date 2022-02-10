@@ -12,42 +12,60 @@ export default Home = () => {
     const [dollar, setDollar] = useState('')
     const [euro, setEuro] = useState('')
 
+    const [dollarQuote, setDollarQuote] = useState('')
+    const [euroQuote, setEuroQuote] = useState('')
+
+    const getInformation = async () => {
+        try {
+            const response = await fetch('https://api.hgbrasil.com/finance?format=json&key=08b9a390');
+            const json = await response.json();
+
+            setDollarQuote(json.results.currencies.USD.buy)
+            setEuroQuote(json.results.currencies.EUR.buy)
+        } catch (error) {
+            console.error(error);
+            Alert.alert('Error fetching data')
+        }
+    }
+   
+
     useEffect(() => {
-        Alert.alert('Iniciou')
+        getInformation()
     }, [])
+    
 
 
     functionReal = (text) => {
         setReal(text)
-
         if(text === ''){
             clearAll()
             return
-        } else {
-
         }
+
+        setDollar((text / dollarQuote).toFixed(2))
+        setEuro((text / euroQuote).toFixed(2))
     }
 
     functionDollar = (text) => {
         setDollar(text)
-
         if(text === ''){
             clearAll()
             return
-        } else {
-            
         }
+
+        setReal((text * dollarQuote).toFixed(2))
+        setEuro((text * dollarQuote / euroQuote).toFixed(2))
     }
 
     functionEuro = (text) => {
         setEuro(text)
-
         if(text === ''){
             clearAll()
             return
-        } else {
-            
         }
+
+        setReal((text * euroQuote).toFixed(2))
+        setDollar((text * euroQuote / dollarQuote).toFixed(2))
     }
 
     clearAll = () => {
