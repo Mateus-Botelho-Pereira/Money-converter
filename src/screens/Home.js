@@ -3,8 +3,11 @@ import {
     StyleSheet,
     View,
     TextInput,
-    Alert
+    Alert,
+    SafeAreaView,
+    StatusBar
 } from 'react-native'
+import Icon from 'react-native-vector-icons/MaterialIcons'
 
 export default Home = () => {
 
@@ -75,43 +78,55 @@ export default Home = () => {
     }
 
     return (
-        <View style={styles.container}>
-            <TextInput placeholder='Reais' 
-                style={styles.input}
-                keyboardType={'numeric'}
-                placeholderTextColor={'white'}
-                value={real.toString()}
-                onChangeText={functionReal} 
-            />
-            <TextInput placeholder='Dollars' 
-                style={styles.input}
-                keyboardType={'numeric'}
-                placeholderTextColor={'white'}
-                value={dollar.toString()}
-                onChangeText={functionDollar} 
-            />
-            <TextInput placeholder='Euros' 
-                style={styles.input}
-                keyboardType={'numeric'}
-                placeholderTextColor={'white'}
-                value={euro.toString()}
-                onChangeText={functionEuro} 
-            />
-        </View>
+        <SafeAreaView style={styles.safeArea}>
+            <StatusBar backgroundColor='black'/>
+            <View style={styles.container}>
+                <Icon name='monetization-on' size={126} style={styles.icon}/>
+                <TextInput placeholder='Reais' 
+                    style={styles.input}
+                    keyboardType={'numeric'}
+                    placeholderTextColor={'#FAED27'}
+                    value={real.toString()}
+                    onChangeText={functionReal} 
+                />
+                <TextInput placeholder='Dollars' 
+                    style={styles.input}
+                    keyboardType={'numeric'}
+                    placeholderTextColor={'#FAED27'}
+                    value={dollar.toString()}
+                    onChangeText={functionDollar} 
+                />
+                <TextInput placeholder='Euros' 
+                    style={styles.input}
+                    keyboardType={'numeric'}
+                    placeholderTextColor={'#FAED27'}
+                    value={euro.toString()}
+                    onChangeText={functionEuro} 
+                />
+            </View>
+        </SafeAreaView>
     )
 }
 
 const styles = StyleSheet.create({
+    safeArea: {
+        flex: 1,
+    },
     container: {
         flex: 1,
         alignItems: 'center',
         backgroundColor: 'black'
     },
+    icon: {
+        color: '#FAED27',
+        marginTop: 24,
+    },
     input: {
-        color: 'white',
-        borderColor: '#FAED27',
+        color: '#FAED27',
+        borderColor: 'white',
+        fontSize: 26,
         borderWidth: 2,
-        borderRadius: 10,
+        borderRadius: 5,
         marginTop: 20,
         paddingLeft: 15,
         width: '90%'
